@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI and Technology</title>
+  <style>
+    :root {
+      --bg: #0f1220;
+      --panel: #1a1f33;
+      --text: #e8ecf8;
+      --muted: #9aa3bf;
+      --accent: #4f8cff;
+      --accent-2: #7c5cff;
+      --danger: #ff6b6b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      padding: 2rem 1rem 1rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+    header h1 { font-size: 2rem; }
+    nav.tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      background: var(--panel);
+      padding: 0.75rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .tab-btn {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid transparent;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active {
+      color: #fff;
+      background: var(--accent);
+    }
+    main { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+    .tab-panel { display: none; animation: fade 0.3s ease; }
+    .tab-panel.active { display: block; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .card {
+      background: var(--panel);
+      border-radius: 12px;
+      padding: 1.25rem;
+      border: 1px solid #262d47;
+    }
+    .card h3 { margin-bottom: 0.5rem; color: var(--accent); }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+    .tag {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: #262d47;
+      color: var(--muted);
+    }
+    .search {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #262d47;
+      background: var(--panel);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .empty { color: var(--muted); margin-top: 1rem; display: none; }
+    form { display: grid; gap: 0.75rem; margin-top: 1rem; max-width: 520px; }
+    label { font-size: 0.9rem; color: var(--muted); }
+    input, textarea {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: 1px solid #262d47;
+      background: var(--panel);
+      color: var(--text);
+      font: inherit;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .error { color: var(--danger); font-size: 0.85rem; min-height: 1.1rem; }
+    button.submit {
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .success { color: #6be59a; margin-top: 0.75rem; display: none; }
+    footer { text-align: center; color: var(--muted); padding: 2rem 1rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>AI and Technology</h1>
+  <p>Practical insights on artificial intelligence and modern tech</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="home">Home</button>
+  <button class="tab-btn" data-tab="ai">AI</button>
+  <button class="tab-btn" data-tab="tech">Technology</button>
+  <button class="tab-btn" data-tab="tools">Tools</button>
+  <button class="tab-btn" data-tab="contact">Contact</button>
+</nav>
+
+<main>
+
+  <section id="home" class="tab-panel active">
+    <h2>Welcome</h2>
+    <p style="color: var(--muted); margin-top: 0.5rem;">
+      Explore how artificial intelligence and technology are shaping work, learning, and everyday life.
+      Use the tabs above to browse topics, or search below.
+    </p>
+    <input type="text" id="searchBox" class="search" placeholder="Search topics (e.g. machine learning, cloud, security)...">
+    <div class="card-grid" id="topicGrid"></div>
+    <p class="empty" id="noResults">No topics match your search.</p>
+  </section>
+
+  <section id="ai" class="tab-panel">
+    <h2>Artificial Intelligence</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Machine Learning</h3>
+        <p>Systems that learn patterns from data instead of following fixed rules.</p>
+        <span class="tag">Fundamentals</span>
+      </div>
+      <div class="card">
+        <h3>Neural Networks</h3>
+        <p>Layered models loosely inspired by the brain, powering image and speech recognition.</p>
+        <span class="tag">Deep Learning</span>
+      </div>
+      <div class="card">
+        <h3>Natural Language Processing</h3>
+        <p>How machines read, understand, and generate human language.</p>
+        <span class="tag">Language</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="tech" class="tab-panel">
+    <h2>Technology</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Cloud Computing</h3>
+        <p>On-demand computing resources delivered over the internet, scaled as needed.</p>
+        <span class="tag">Infrastructure</span>
+      </div>
+      <div class="card">
+        <h3>Cybersecurity</h3>
+        <p>Protecting systems, networks, and data from unauthorized access and attacks.</p>
+        <span class="tag">Security</span>
+      </div>
+      <div class="card">
+        <h3>Internet of Things</h3>
+        <p>Connected devices that collect and exchange data with each other.</p>
+        <span class="tag">Connectivity</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools" class="tab-panel">
+    <h2>Helpful Tools</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Version Control</h3>
+        <p>Track changes to code and collaborate safely with a team.</p>
+        <span class="tag">Developer</span>
+      </div>
+      <div class="card">
+        <h3>Spreadsheets</h3>
+        <p>Organize, calculate, and visualize data without writing code.</p>
+        <span class="tag">Productivity</span>
+      </div>
+      <div class="card">
+        <h3>Note Taking</h3>
+        <p>Capture ideas and link them together in a searchable knowledge base.</p>
+        <span class="tag">Productivity</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="tab-panel">
+    <h2>Contact Us</h2>
+    <form id="contactForm" novalidate>
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Your name">
+        <div class="error" id="nameError"></div>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@example.com">
+        <div class="error" id="emailError"></div>
+      </div>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="How can we help?"></textarea>
+        <div class="error" id="messageError"></div>
+      </div>
+      <button type="submit" class="submit">Send Message</button>
+      <div class="success" id="successMsg">Thanks! Your message has been sent.</div>
+    </form>
+  </section>
+
+</main>
+
+<footer>&copy; <span id="year"></span> AI and Technology. All rights reserved.</footer>
+
+<script>
+  // ---------- Tabs ----------
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  function showTab(name) {
+    tabButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === name));
+    tabPanels.forEach(panel => panel.classList.toggle('active', panel.id === name));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  tabButtons.forEach(btn => btn.addEventListener('click', () => showTab(btn.dataset.tab)));
+
+  // ---------- Search on Home ----------
+  const topics = [
+    { title: 'Machine Learning', desc: 'Learning patterns from data', tag: 'AI' },
+    { title: 'Neural Networks', desc: 'Layered models for recognition', tag: 'AI' },
+    { title: 'Natural Language Processing', desc: 'Machines that understand language', tag: 'AI' },
+    { title: 'Cloud Computing', desc: 'Computing resources on demand', tag: 'Technology' },
+    { title: 'Cybersecurity', desc: 'Protecting systems and data', tag: 'Technology' },
+    { title: 'Internet of Things', desc: 'Connected devices exchanging data', tag: 'Technology' },
+    { title: 'Version Control', desc: 'Tracking and collaborating on code', tag: 'Tools' },
+    { title: 'Spreadsheets', desc: 'Organizing and analyzing data', tag: 'Tools' },
+    { title: 'Note Taking', desc: 'Linking ideas in a knowledge base', tag: 'Tools' }
+  ];
+
+  const topicGrid = document.getElementById('topicGrid');
+  const searchBox = document.getElementById('searchBox');
+  const noResults = document.getElementById('noResults');
+
+  function renderTopics(list) {
+    topicGrid.innerHTML = '';
+    list.forEach(topic => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <h3>${topic.title}</h3>
+        <p>${topic.desc}</p>
+        <span class="tag">${topic.tag}</span>`;
+      topicGrid.appendChild(card);
+    });
+    noResults.style.display = list.length ? 'none' : 'block';
+  }
+
+  searchBox.addEventListener('input', () => {
+    const query = searchBox.value.trim().toLowerCase();
+    const filtered = topics.filter(t =>
+      t.title.toLowerCase().includes(query) ||
+      t.desc.toLowerCase().includes(query) ||
+      t.tag.toLowerCase().includes(query)
+    );
+    renderTopics(filtered);
+  });
+
+  renderTopics(topics);
+
+  // ---------- Contact form validation ----------
+  const form = document.getElementById('contactForm');
+  const successMsg = document.getElementById('successMsg');
+
+  function setError(id, msg) {
+    document.getElementById(id).textContent = msg;
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    successMsg.style.display = 'none';
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    let valid = true;
+
+    setError('nameError', name ? '' : 'Please enter your name.');
+    if (!name) valid = false;
+
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    setError('emailError', emailOk ? '' : 'Please enter a valid email address.');
+    if (!emailOk) valid = false;
+
+    setError('messageError', message.length >= 10 ? '' : 'Message must be at least 10 characters.');
+    if (message.length < 10) valid = false;
+
+    if (valid) {
+      successMsg.style.display = 'block';
+      form.reset();
+    }
+  });
+
+  // ---------- Footer year ----------
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
